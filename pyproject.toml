@@ -1,0 +1,39 @@
+#What is pyproject.toml?It’s a standardized configuration file for Python projects, introduced in PEP 518. Think of it as a modern alternative to requirements.txt, plus a place to define project metadata and configure build tools.
+#use poetry for clean workflow in file.
+#starter version
+[project]
+name = "hey-paso"
+version = "0.1.0"
+description = "AI-powered web dashboard for El Paso events and recommendations"
+authors = [
+    { name = "Team Hey Paso", email = "contact@heypaso.com" }
+]
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "openai",
+    "langchain",
+    "python-dotenv",
+    "pydantic",
+    "requests",
+    "pandas",
+    "prophet",
+    "plotly",
+    "beautifulsoup4",
+    "selenium",
+    "faiss-cpu",  # if using FAISS for vector storage
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+strict = true

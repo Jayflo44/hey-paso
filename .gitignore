@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.env
+
+# Node (for frontend)
+node_modules/
+dist/
+.env.local
+
+# OS
+.DS_Store
+
+# Poetry
+.poetry/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VSCode
+.vscode/
