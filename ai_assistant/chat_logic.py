@@ -44,13 +44,13 @@ class Prompt(BaseModel):
 async def generate_text(prompt: Prompt):
     user_input = prompt.text.lower()
 
-    # 🎯 Maps intent
+    # Maps intent
     if any(keyword in user_input for keyword in ["where is", "show me", "map", "directions to"]):
         location = user_input.replace("where is", "").replace("show me", "").strip()
         map_url = generate_maps_url(location)
         return {"response": f"Here’s the map for that location: {map_url}"}
 
-    # 🍽️ Reservation intent (OpenTable)
+    #Reservation intent (OpenTable)
     elif any(keyword in user_input for keyword in ["reserve", "book", "reservation", "table at"]):
         if "table at" in user_input:
             restaurant = user_input.split("table at")[-1].strip()
@@ -59,19 +59,19 @@ async def generate_text(prompt: Prompt):
         reservation_url = generate_opentable_url(restaurant)
         return {"response": f"Here's the reservation link for {restaurant}: {reservation_url}"}
 
-    # 🎟️ Fandango intent (movies)
+    # Fandango intent (movies)
     elif any(keyword in user_input for keyword in ["movie", "showtime", "theater", "cinemark"]):
         movie = user_input.replace("find tickets for", "").replace("movie", "").replace("at", "").strip()
         movie_url = generate_fandango_url(movie)
         return {"response": f"Here’s the Fandango link: {movie_url}"}
 
-    # 🎉 Eventbrite intent (events)
+    # Eventbrite intent (events)
     elif any(keyword in user_input for keyword in ["event", "concert", "festival", "weekend", "eventbrite"]):
         query = user_input.replace("find", "").replace("events", "").replace("event", "").strip()
         event_url = generate_eventbrite_url(query)
         return {"response": f"Here’s what’s happening in El Paso: {event_url}"}
 
-    # 🤖 Default to Gemini AI
+    #Default to Gemini AI
     try:
         response = model.generate_content(prompt.text)
         return {"response": response.text}
